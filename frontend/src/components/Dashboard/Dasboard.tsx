@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Footer from '../Footer/Footer';
 import IDE from '../MonacoEditor/IDE';
 
 function Dashboard() {
@@ -14,7 +15,9 @@ function Dashboard() {
 						<IDE />
 					</div>
 				</div>
-				<div className="flex-1 border-t border-grey ">Information</div>
+				<div className="flex-1 border-t border-grey ">
+					<Footer />
+				</div>
 			</div>
 		</div>
 		// <div className="flex size-full flex-col bg-Black">
