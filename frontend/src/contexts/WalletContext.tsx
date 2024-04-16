@@ -10,7 +10,7 @@ interface SetStateContext<T> {
 	setValue?: React.Dispatch<React.SetStateAction<T>>;
 }
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
+const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID ?? '';
 const CHAIN_CONFIG = {
 	chainId: '0x1',
 	rpcTarget: 'https://rpc.ankr.com/eth',
@@ -53,8 +53,6 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
 		const handleLogin = async () => {
 			const isConnected = await web3Service.login();
-			console.log('okkkkk');
-			console.log(isConnected);
 			setIsLogged(isConnected);
 			if (isConnected) {
 				const c = await web3Service.getAccounts();

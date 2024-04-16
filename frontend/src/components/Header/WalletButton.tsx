@@ -40,10 +40,10 @@ function WalletButon() {
 		uiConsole();
 	};
 
-	const handleSign = async () => {
-		const ok = await web3Service.signMessage('ok');
-		uiConsole(ok);
-	};
+	// const handleSign = async () => {
+	// 	const ok = await web3Service.signMessage('ok');
+	// 	uiConsole(ok);
+	// };
 
 	const handleGetUserInfo = async () => {
 		const ok = await web3Service.getUserInfo();
