@@ -9,8 +9,30 @@ function IDE() {
 	const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
 	const [files, setFiles] = useState([
-		{ name: 'zkContract.sol', language: 'sol', content: '// code for file 1' },
-		{ name: 'deploy.sol', language: 'sol', content: '// code for file 2' },
+		{
+			name: 'deploy.sol',
+			language: 'sol',
+			content: `pragma solidity ^0.8.24;
+				
+contract MyContract {
+				
+	function callback(<...>, bytes32 postStateDigest, bytes calldata seal) public {
+	// TODO: 
+	}
+}`,
+		},
+		{
+			name: 'zkContract.sol',
+			language: 'sol',
+			content: `pragma solidity ^0.8.24;
+		
+contract zkContract {
+		
+	function zkvm_entrypoint(<...>) public {
+	// TODO: 
+	}
+}`,
+		},
 	]);
 
 	const handleEditorChange = (content: string | undefined, idx: number) => {
@@ -52,7 +74,7 @@ function IDE() {
 							</Tab>
 						))}
 					</Tab.List>
-					<div className="absolute bottom-0 mb-2 h-0.5 rounded-full bg-White" style={indicatorStyle} />
+					<div className="absolute bottom-0 m-2 h-0.5 rounded-full bg-White" style={indicatorStyle} />
 				</div>
 				<Tab.Panels className="flex h-full">
 					{files.map((file, idx) => (
