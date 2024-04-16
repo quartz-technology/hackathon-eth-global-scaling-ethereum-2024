@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@monaco-editor/react": "^4.6.0",
     "@safe-global/auth-kit": "^2.0.3",
     "@safe-global/protocol-kit": "^3.0.2",
     "@walletconnect/modal": "^2.6.2",
@@ -30,11 +31,13 @@
     "eslint-plugin-tailwindcss": "^3.15.1",
     "eslint-plugin-testing-library": "^6.2.1",
     "ethers": "^6.11.1",
+    "monaco-editor": "^0.47.0",
     "next": "14.2.1",
     "next-auth": "^4.24.7",
     "next-svg": "^1.0.7",
     "react": "^18",
     "react-dom": "^18",
+    "react-monaco-editor": "^0.55.0",
     "react-query": "^3.39.3",
     "react-toastify": "^10.0.5",
     "web3": "^4.7.0"

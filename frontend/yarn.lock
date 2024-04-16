@@ -1536,6 +1536,20 @@
     superstruct "^1.0.3"
     uuid "^9.0.1"
 
+"@monaco-editor/loader@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/loader/-/loader-1.4.0.tgz#f08227057331ec890fa1e903912a5b711a2ad558"
+  integrity sha512-00ioBig0x642hytVspPl7DbQyaSWRaolYie/UFNjoTdvoKPzo6xrXLhTk9ixgIKcLH5b5vDOjVNiGyY+uDCUlg==
+  dependencies:
+    state-local "^1.0.6"
+
+"@monaco-editor/react@^4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-4.6.0.tgz#bcc68671e358a21c3814566b865a54b191e24119"
+  integrity sha512-RFkU9/i7cN2bsq/iTkurMWOEErmYcY6JiQI3Jn+WeR/FGISH8JbHERjpS9oRuSOPvDMJI0Z8nJeKkbOs9sBYQw==
+  dependencies:
+    "@monaco-editor/loader" "^1.4.0"
+
 "@motionone/animation@^10.15.1", "@motionone/animation@^10.17.0":
   version "10.17.0"
   resolved "https://registry.yarnpkg.com/@motionone/animation/-/animation-10.17.0.tgz#7633c6f684b5fee2b61c405881b8c24662c68fca"
@@ -7999,6 +8013,11 @@ mock-fs@^4.1.0:
   resolved "https://registry.yarnpkg.com/mock-fs/-/mock-fs-4.14.0.tgz#ce5124d2c601421255985e6e94da80a7357b1b18"
   integrity sha512-qYvlv/exQ4+svI3UOvPUpLDF0OMX5euvUH0Ny4N5QyRyhNdgAgUrVH3iUINSzEPLvx0kbo/Bp28GJKIqvE7URw==
 
+monaco-editor@^0.47.0:
+  version "0.47.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.47.0.tgz#39865d67e0c9fb8c6b49e760bf9caf6a6650d28e"
+  integrity sha512-VabVvHvQ9QmMwXu4du008ZDuyLnHs9j7ThVFsiJoXSOQk18+LF89N4ADzPbFenm0W4V2bGHnFBztIRQTgBfxzw==
+
 motion@10.16.2:
   version "10.16.2"
   resolved "https://registry.yarnpkg.com/motion/-/motion-10.16.2.tgz#7dc173c6ad62210a7e9916caeeaf22c51e598d21"
@@ -8995,6 +9014,13 @@ react-is@^16.13.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-monaco-editor@^0.55.0:
+  version "0.55.0"
+  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.55.0.tgz#8933e8acc28e177b8b2aaf23593716b8cebf27a8"
+  integrity sha512-GdEP0Q3Rn1dczfKEEyY08Nes5plWwIYU4sWRBQO0+jsQWQsKMHKCC6+hPRwR7G/4aA3V/iU9jSmWPzVJYMVFSQ==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-qr-code@^2.0.8:
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/react-qr-code/-/react-qr-code-2.0.12.tgz#98f99e9ad5ede46d73ab819e2dd9925c5f5d7a2d"
@@ -9613,6 +9639,11 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
+
+state-local@^1.0.6:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/state-local/-/state-local-1.0.7.tgz#da50211d07f05748d53009bee46307a37db386d5"
+  integrity sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==
 
 statuses@2.0.1:
   version "2.0.1"
