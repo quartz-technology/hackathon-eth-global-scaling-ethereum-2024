@@ -26,3 +26,20 @@
   font-weight: bold;
   font-style: italic;
 }
+
+
+@keyframes slide {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.tab-bar {
+  position: relative;
+  height: 4px;
+  background: linear-gradient(to right, #ef7219, #773e8a);
+  transition: transform 0.3s ease;
+}
