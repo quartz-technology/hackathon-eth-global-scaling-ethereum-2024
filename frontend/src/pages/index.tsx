@@ -1,16 +1,16 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
-import Dashboard from '@/components/Dashboard/Dasboard';
 import Layout from '@/components/Layout';
 
-// const CreateSafeComponent = dynamic(() => import('../components/SafeManager'), {
-// 	ssr: false,
-// });
+const DashboardSafe = dynamic(() => import('../components/Dashboard/Dasboard'), {
+	ssr: false,
+});
 
 function HomePage() {
 	return (
 		<Layout>
-			<Dashboard />
+			<DashboardSafe />
 		</Layout>
 	);
 }
