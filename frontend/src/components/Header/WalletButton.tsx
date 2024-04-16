@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import WalletConnectSignal from '@/assets/WalletConnectSignal.svg';
 import Web3AuthService from '@/services/web3Auth';
 
-const CLIENT_ID = 'BB6QXZ9Qvas6GePF8qeJSi40B7-Lt4MzmmfzhDXeT9BmVERVGkphW6NVtBMHuxQQMMqjy3j8gOesXrN9S5WeFG4'; // get from https://dashboard.web3auth.io
+const CLIENT_ID = ''; // get from https://dashboard.web3auth.io
 
 const CHAIN_CONFIG: CustomChainConfig = {
 	chainId: '0x1',
