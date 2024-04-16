@@ -41,7 +41,7 @@ export default class Web3AuthService {
 				this.web3 = new Web3(this.web3Auth.provider as any);
 			}
 		} catch (error) {
-			console.error('Initialization error:', error);
+			// console.error('Initialization error:', error);
 		}
 	}
 
@@ -50,7 +50,7 @@ export default class Web3AuthService {
 			await this.web3Auth.connect();
 			return this.web3Auth.connected;
 		} catch (error) {
-			console.error('Login error:', error);
+			// console.error('Login error:', error);
 			return false;
 		}
 	}
@@ -61,21 +61,21 @@ export default class Web3AuthService {
 
 	async getUserInfo() {
 		if (!this.web3Auth) {
-			console.error('Web3Auth not initialized');
+			// console.error('Web3Auth not initialized');
 			return null;
 		}
 		try {
 			const userInfo = await this.web3Auth.getUserInfo();
 			return userInfo;
 		} catch (error) {
-			console.error('Failed to get user info:', error);
+			// console.error('Failed to get user info:', error);
 			return null;
 		}
 	}
 
 	async getAccounts() {
 		if (!this.web3) {
-			console.error('Web3 not initialized');
+			// console.error('Web3 not initialized');
 			return [];
 		}
 		return this.web3.eth.getAccounts();
@@ -83,7 +83,7 @@ export default class Web3AuthService {
 
 	async getBalance() {
 		if (!this.web3) {
-			console.error('Web3 not initialized');
+			// console.error('Web3 not initialized');
 			return '0';
 		}
 		const accounts = await this.getAccounts();
@@ -96,20 +96,20 @@ export default class Web3AuthService {
 
 	async signMessage(message: string): Promise<string | null> {
 		if (!this.web3) {
-			console.error('Web3 not initialized');
+			// console.error('Web3 not initialized');
 			return null;
 		}
 
 		try {
 			const accounts = await this.web3.eth.getAccounts();
 			if (accounts.length === 0) {
-				console.error('No accounts available');
+				// console.error('No accounts available');
 				return null;
 			}
 			const signedMessage = await this.web3.eth.personal.sign(message, accounts[0], ''); // Assuming no password needed.
 			return signedMessage;
 		} catch (error) {
-			console.error('Failed to sign message:', error);
+			// console.error('Failed to sign message:', error);
 			return null;
 		}
 	}
