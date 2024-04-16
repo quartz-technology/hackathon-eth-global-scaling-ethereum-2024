@@ -12,10 +12,10 @@ interface SetStateContext<T> {
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID ?? '';
 const CHAIN_CONFIG = {
-	chainId: '0x1',
-	rpcTarget: 'https://rpc.ankr.com/eth',
+	chainId: '0xaa36a7',
+	rpcTarget: 'https://rpc2.sepolia.org',
 	chainNamespace: CHAIN_NAMESPACES.EIP155,
-	displayName: 'Ethereum Mainnet',
+	displayName: 'Ethereum Sepolia',
 	blockExplorerUrl: 'https://etherscan.io/',
 	ticker: 'ETH',
 	tickerName: 'Ethereum',

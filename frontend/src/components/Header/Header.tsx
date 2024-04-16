@@ -11,7 +11,7 @@ function Header() {
 
 	return (
 		<div className="mx-2 flex flex-1 border-b border-grey">
-			<div className="mr-2 flex items-center border border-grey p-10 text-xl font-bold">Logo</div>
+			<div className="mr-2 flex items-center border border-grey p-5 text-xl font-bold">zkora</div>
 
 			<div className=" flex flex-1 flex-col justify-center ">
 				<div className="flex  ">
