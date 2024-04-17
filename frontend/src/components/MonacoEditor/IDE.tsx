@@ -1,14 +1,14 @@
 import { Tab } from '@headlessui/react';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { useIDEContext } from '@/contexts/IDEContext';
+import { useCompileContext } from '@/contexts/CompileContext';
 
 import MonacoEditor from './MonacoEditor';
 
 function IDE() {
 	const [indicatorStyle, setIndicatorStyle] = useState({});
 	const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
-	const { files, selectedIndex } = useIDEContext();
+	const { files, selectedIndex } = useCompileContext();
 
 	const handleEditorChange = (content: string | undefined, idx: number) => {
 		if (content !== undefined) {

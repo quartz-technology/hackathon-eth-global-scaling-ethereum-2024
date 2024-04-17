@@ -1,12 +1,14 @@
 import React from 'react';
 
-import Footer from '../Footer/Footer';
 import IDE from '../MonacoEditor/IDE';
+import DynamicComponentLoader from '../Sidebar/DynamicComponentLoader';
 
 function Dashboard() {
 	return (
 		<div className="mx-2 flex size-full ">
-			<div className="flex-1 border-r border-grey ">{/* List Person */}</div>
+			<div className="flex-1 border-r border-grey ">
+				<DynamicComponentLoader />
+			</div>
 
 			<div className="flex flex-[3_2_0%] flex-col ">
 				<div className="flex flex-[5_2_0%] ">
@@ -15,9 +17,7 @@ function Dashboard() {
 						<IDE />
 					</div>
 				</div>
-				<div className="flex-1 border-t border-grey ">
-					<Footer />
-				</div>
+				{/* <div className="flex-1 border-t border-grey "><Footer /></div> */}
 			</div>
 		</div>
 		// <div className="flex size-full flex-col bg-Black">
