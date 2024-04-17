@@ -2,15 +2,15 @@ import '../styles/globals.css';
 
 import { AppProps } from 'next/app';
 
-import { IDEProvider } from '@/contexts/IDEContext';
+import { CompileProvider } from '@/contexts/CompileContext';
 import { WalletProvider } from '@/contexts/WalletContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<WalletProvider>
-			<IDEProvider>
+			<CompileProvider>
 				<Component {...pageProps} />
-			</IDEProvider>
+			</CompileProvider>
 		</WalletProvider>
 	);
 }

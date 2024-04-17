@@ -13,22 +13,32 @@ interface IFileInfo {
 	content: string;
 }
 
-interface IIDEContext {
+interface ICompileContext {
 	files: SetStateContext<IFileInfo[]>;
 	selectedIndex: SetStateContext<number>;
+	abi: SetStateContext<string>;
+	bytecode: SetStateContext<string>;
 }
 
-const IDEContext = createContext<IIDEContext>({
+const CompileContext = createContext<ICompileContext>({
 	files: {
 		value: [],
 	},
 	selectedIndex: {
 		value: 0,
 	},
+	abi: {
+		value: '',
+	},
+	bytecode: {
+		value: '',
+	},
 });
 
-export const IDEProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const CompileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [selectedIndex, setSelectedIndex] = useState<number>(0);
+	const [abi, setAbi] = useState<string>('');
+	const [bytecode, setBytecode] = useState<string>('');
 	const [files, setFiles] = useState<IFileInfo[]>([
 		{
 			name: 'deploy.sol',
@@ -92,7 +102,7 @@ res`,
 	]);
 
 	return (
-		<IDEContext.Provider
+		<CompileContext.Provider
 			value={{
 				files: {
 					value: files,
@@ -102,11 +112,19 @@ res`,
 					value: selectedIndex,
 					setValue: setSelectedIndex,
 				},
+				abi: {
+					value: abi,
+					setValue: setAbi,
+				},
+				bytecode: {
+					value: bytecode,
+					setValue: setBytecode,
+				},
 			}}
 		>
 			{children}
-		</IDEContext.Provider>
+		</CompileContext.Provider>
 	);
 };
 
-export const useIDEContext = () => useContext(IDEContext);
+export const useCompileContext = () => useContext(CompileContext);
