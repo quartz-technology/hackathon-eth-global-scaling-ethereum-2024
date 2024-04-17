@@ -5,6 +5,7 @@ import useCompileCode from '@/hooks/useCompileCode';
 
 import { CompileButton, PublishButton } from './Buttons';
 import ClipboardCopyButton from './ClipBoardCopyButton';
+import ContractFunctionsCall from './ContractFunctionsCall';
 
 function CompileSol() {
 	const { abi, bytecode } = useCompileContext();
@@ -35,9 +36,11 @@ function CompileSol() {
 					</div>
 				</div>
 			</div>
-			<div className="z-10 flex flex-1 flex-col border-t border-grey">
+			<div className=" flex flex-1 flex-col border-t border-grey">
 				<h2 className="m-2 flex underline">RUN TRANSACTION</h2>
-				<div className="flex flex-1 flex-col items-center justify-center gap-2"></div>
+				<div className="-ml-1 flex max-h-96 w-full  flex-col gap-2 overflow-y-auto ">
+					<ContractFunctionsCall />
+				</div>
 			</div>
 		</>
 	);
