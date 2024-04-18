@@ -13,7 +13,6 @@ function CompileSol() {
 
 	return (
 		<>
-			<ToastContainer position="top-center" autoClose={5000} />
 			<div className="flex flex-1 flex-col  items-center justify-center ">
 				<h2 className="m-2 flex self-start underline">SOLIDITY COMPILER & DEPLOY</h2>
 				<div className="flex flex-1 flex-col items-center justify-center gap-2 ">

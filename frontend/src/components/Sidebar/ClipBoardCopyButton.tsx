@@ -9,7 +9,10 @@ interface ClipboardCopyButtonProps {
 
 const ClipboardCopyButton: React.FC<ClipboardCopyButtonProps> = ({ text, label }) => (
 	<CopyToClipboard text={text} onCopy={() => toast.success(`${label} copied to clipboard!`)}>
-		<button className="flex flex-row items-center text-xs" disabled={!text}>
+		<button
+			className={`flex flex-row items-center text-xs  ${text ? 'text-white' : 'text-secondGrey'}`}
+			disabled={!text}
+		>
 			<div className="flex flex-row items-center">
 				<RxClipboardCopy className="mr-1 size-3" aria-hidden="true" />
 				{label}
