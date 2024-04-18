@@ -36,21 +36,21 @@ function IDE() {
 	}, [selectedIndex]);
 
 	return (
-		<div className="flex size-full flex-col ">
+		<div className="flex size-full flex-col">
 			<Tab.Group selectedIndex={selectedIndex.value} onChange={selectedIndex.setValue}>
 				<div className="relative">
-					<Tab.List className="flex space-x-1 rounded-xl  p-1">
+					<Tab.List className="flex space-x-1 rounded-xl  p-1 ">
 						{files.value.map((file, idx) => (
 							<Tab
 								key={idx}
 								ref={(el) => (tabsRef.current[idx] = el)}
-								className="w-full rounded-lg py-2.5 text-sm  font-medium leading-5 text-White ring-0 focus:outline-none"
+								className="w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-White ring-0 hover:bg-grey focus:outline-none"
 							>
 								{file.name}
 							</Tab>
 						))}
 					</Tab.List>
-					<div className="absolute bottom-0 m-2 h-0.5 rounded-full bg-White" style={indicatorStyle} />
+					<div className="absolute bottom-0 mb-2 h-0.5 rounded-full bg-White" style={indicatorStyle} />
 				</div>
 				<Tab.Panels className="flex h-full">
 					{files.value.map((file, idx) => (
