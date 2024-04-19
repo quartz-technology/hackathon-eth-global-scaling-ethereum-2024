@@ -14,7 +14,7 @@ function CompileSol() {
 	return (
 		<>
 			<div className="flex flex-1 flex-col  items-center justify-center ">
-				<h2 className="m-2 flex self-start underline">SOLIDITY COMPILER & DEPLOY</h2>
+				<h2 className="m-2 flex self-start font-bold">- COMPILER & DEPLOY -</h2>
 				<div className="flex flex-1 flex-col items-center justify-center gap-2 ">
 					<div className="flex flex-col items-center justify-center gap-2 ">
 						<div className="flex items-center justify-center ">
@@ -36,7 +36,7 @@ function CompileSol() {
 				</div>
 			</div>
 			<div className=" flex flex-1 flex-col border-t border-grey">
-				<h2 className="m-2 flex underline">RUN TRANSACTION</h2>
+				<h2 className="m-2 flex font-bold">- INTERACT WITH CONTRACT -</h2>
 				<div className="-ml-1 flex max-h-96 w-full  flex-col gap-2 overflow-y-auto ">
 					<ContractFunctionsCall />
 				</div>

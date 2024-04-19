@@ -43,7 +43,7 @@ export const RunScriptButton: React.FC<{ onClick: () => void }> = ({ onClick }) 
 export const PublishButton: React.FC<{ onClick: () => void }> = ({ onClick }) => (
 	<ActionButton onClick={onClick} className="flex w-full items-center justify-center p-px">
 		<div className="m-px  flex size-full items-center justify-center rounded-lg bg-grey p-2 text-sm italic text-white hover:bg-black">
-			Publish on Sepolia
+			Deploy on Sepolia
 			<FaEthereum className="ml-2 size-5 fill-White" aria-hidden="true" />
 		</div>
 	</ActionButton>
