@@ -38,7 +38,12 @@ const ContractFunctionsCall: React.FC = () => {
 		// Here you would add your contract call logic
 	};
 
-	if (!abi.value) return <div className="flex items-center justify-center italic">Waiting compile...</div>;
+	if (!abi.value)
+		return (
+			<div className="flex w-36 items-center justify-center self-center text-center text-xs italic">
+				Waiting for contract compilation..
+			</div>
+		);
 
 	const abiParsed: ABI = JSON.parse(abi.value);
 
