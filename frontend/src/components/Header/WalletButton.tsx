@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { HiArrowRightStartOnRectangle } from 'react-icons/hi2';
 
 import WalletConnectSignal from '@/assets/WalletConnectSignal.svg';
@@ -5,6 +6,7 @@ import { useWeb3Context } from '@/contexts/WalletContext';
 
 function WalletButon() {
 	const { account, isLogged, web3Service } = useWeb3Context();
+	const [balance, setBalance] = useState<string>(0);
 
 	// TODO: remove just for testing
 	// function uiConsole(...args: any[]): void {
@@ -14,6 +16,20 @@ function WalletButon() {
 	// 	}
 	// 	console.log(...args);
 	// }
+
+	const handleBalance = async () => {
+		const b = await web3Service.getBalance();
+		setBalance(b);
+		// uiConsole(ok);
+	};
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			handleBalance();
+		}, 10000);
+
+		return () => clearInterval(interval);
+	}, []);
 
 	const handleLogin = async () => {
 		if (!isLogged.setValue) return;
@@ -27,6 +43,7 @@ function WalletButon() {
 				account.setValue(c[0]);
 			}
 		}
+		handleBalance();
 	};
 
 	const handleDisconnect = async () => {
@@ -51,19 +68,17 @@ function WalletButon() {
 	// 	uiConsole(ok);
 	// };
 
-	// const handleBalance = async () => {
-	// 	const ok = await web3Service.getBalance();
-	// 	uiConsole(ok);
-	// };
-
 	const loggedInView = (
 		<>
-			<button onClick={handleDisconnect} className="flex items-center justify-center p-px">
-				<div className="m-px  flex size-full items-center justify-center rounded-lg bg-grey p-2 text-sm italic text-white hover:bg-black">
-					Disconnect
-					<HiArrowRightStartOnRectangle className="ml-1 size-5 fill-White" aria-hidden="true" />
-				</div>
-			</button>
+			<div className="flex flex-col items-center">
+				<div className="m-0.5 flex truncate text-xs">{balance} SepoliaETH</div>
+				<button onClick={handleDisconnect} className="flex items-center justify-center p-px">
+					<div className="m-px  flex size-full items-center justify-center rounded-lg bg-grey p-2 text-sm italic text-white hover:bg-black">
+						Disconnect
+						<HiArrowRightStartOnRectangle className="ml-1 size-5 fill-White" aria-hidden="true" />
+					</div>
+				</button>
+			</div>
 		</>
 	);
 
