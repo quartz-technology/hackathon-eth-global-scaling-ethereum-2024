@@ -1,4 +1,4 @@
-// pages/api/compile.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { NextApiRequest, NextApiResponse } from 'next';
 import solc from 'solc';
 
@@ -52,6 +52,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
 		const bytecode = contractOutput.evm.bytecode.object;
 		const { abi } = contractOutput;
+
+		// Validate that at least one function has the required parameters
+		const requiredParams = [
+			{ name: 'postStateDigest', type: 'bytes32' },
+			{ name: 'seal', type: 'bytes' },
+		];
+		const hasRequiredParams = abi.some((item: { type: string; inputs: { name: any; type: any }[] }) => {
+			if (item.type === 'function') {
+				const paramNamesTypes = item.inputs.map((tmp: { name: any; type: any }) => ({
+					name: tmp.name,
+					type: tmp.type,
+				}));
+				return requiredParams.every((reqParam) =>
+					paramNamesTypes.some(
+						(param: { name: string; type: string }) =>
+							param.name === reqParam.name && param.type === reqParam.type,
+					),
+				);
+			}
+			return false;
+		});
+
+		if (!hasRequiredParams) {
+			throw new Error('No function with the required parameters (postStateDigest or seal) found.');
+		}
 
 		res.status(200).json({ bytecode, abi });
 	} catch (error) {
