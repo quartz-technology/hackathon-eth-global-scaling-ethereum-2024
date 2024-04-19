@@ -47,7 +47,6 @@ export default function useCompileCode() {
 			if (error instanceof Error) {
 				toast.error(`Compilation error: ${error.message}`);
 			}
-
 			bytecode.setValue('');
 			abi.setValue('');
 		}
