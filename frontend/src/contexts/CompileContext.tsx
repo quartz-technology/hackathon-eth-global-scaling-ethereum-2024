@@ -13,11 +13,19 @@ interface IFileInfo {
 	content: string;
 }
 
+interface IZkResult {
+	postDigest: string;
+	seal: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	result: any;
+}
+
 interface ICompileContext {
 	files: SetStateContext<IFileInfo[]>;
 	selectedIndex: SetStateContext<number>;
 	abi: SetStateContext<string>;
 	bytecode: SetStateContext<string>;
+	zkResult: SetStateContext<IZkResult>;
 }
 
 const CompileContext = createContext<ICompileContext>({
@@ -33,12 +41,20 @@ const CompileContext = createContext<ICompileContext>({
 	bytecode: {
 		value: '',
 	},
+	zkResult: {
+		value: {
+			postDigest: '',
+			seal: '',
+			result: '',
+		},
+	},
 });
 
 export const CompileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [selectedIndex, setSelectedIndex] = useState<number>(0);
 	const [abi, setAbi] = useState<string>('');
 	const [bytecode, setBytecode] = useState<string>('');
+	const [zkResult, setZkResult] = useState<IZkResult>({ seal: '', postDigest: '', result: '' });
 	const [files, setFiles] = useState<IFileInfo[]>([
 		{
 			name: 'deploy.sol',
@@ -119,6 +135,10 @@ res`,
 				bytecode: {
 					value: bytecode,
 					setValue: setBytecode,
+				},
+				zkResult: {
+					value: zkResult,
+					setValue: setZkResult,
 				},
 			}}
 		>

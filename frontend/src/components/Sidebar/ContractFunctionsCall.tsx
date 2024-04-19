@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 
 import { useCompileContext } from '@/contexts/CompileContext';
@@ -11,10 +11,32 @@ type ABI = Array<{
 		type: string;
 	}>;
 }>;
+
+type InputsType = { [funcName: string]: string[] };
+
 const ContractFunctionsCall: React.FC = () => {
-	const { abi } = useCompileContext();
-	const [inputs, setInputs] = useState<{ [key: string]: string[] }>({});
+	const { abi, zkResult } = useCompileContext();
+	const [inputs, setInputs] = useState<InputsType>({});
 	const [openFunctions, setOpenFunctions] = useState<{ [key: string]: boolean }>({});
+
+	useEffect(() => {
+		// Initialize input values based on zkResult
+		if (abi.value) {
+			const abiParsed: ABI = JSON.parse(abi.value);
+
+			const newInputs = abiParsed.reduce((acc, func) => {
+				const inputValues = func.inputs.map((input) => {
+					if (input.name === 'postStateDigest') return zkResult.value.postDigest;
+					if (input.name === 'seal') return zkResult.value.seal;
+					return '';
+				});
+				acc[func.name] = inputValues;
+				return acc;
+			}, {} as InputsType);
+
+			setInputs(newInputs);
+		}
+	}, [abi.value, zkResult.value.postDigest, zkResult.value.seal]);
 
 	const handleInputChange = (funcName: string, index: number, value: string) => {
 		setInputs({
@@ -52,7 +74,7 @@ const ContractFunctionsCall: React.FC = () => {
 			{abiParsed
 				.filter((item) => item.type === 'function' && item.inputs.length > 0)
 				.map((func, idx) => (
-					<div key={idx} className=" w-full rounded-lg border border-grey p-4 shadow-md">
+					<div key={idx} className="w-full rounded-lg border border-grey p-4 shadow-md">
 						<button
 							onClick={() => toggleFunction(func.name)}
 							className="flex w-full items-center justify-between text-left"
@@ -65,29 +87,25 @@ const ContractFunctionsCall: React.FC = () => {
 							)}
 						</button>
 						{openFunctions[func.name] && (
-							<div className="mt-2 flex flex-col ">
+							<div className="mt-2 flex flex-col">
 								{func.inputs.map((input, inputIdx) => (
-									<>
-										<div className="flex flex-row items-center justify-end ">
-											<p className="text-xs text-secondGrey">{input.name}:</p>
-
-											<input
-												key={inputIdx}
-												type="text"
-												placeholder={`${input.type}`}
-												value={inputs[func.name]?.[inputIdx] || ''}
-												onChange={(e) => handleInputChange(func.name, inputIdx, e.target.value)}
-												className="mt-1 flex w-36 rounded-md border  border-secondGrey bg-black  p-2  focus:border-customOrange focus:outline-none  sm:text-sm"
-											/>
-										</div>
-									</>
+									<div key={inputIdx} className="flex flex-row items-center justify-end">
+										<p className="text-xs text-secondGrey">{input.name}:</p>
+										<input
+											type="text"
+											placeholder={`${input.type}`}
+											value={inputs[func.name]?.[inputIdx] || ''}
+											onChange={(e) => handleInputChange(func.name, inputIdx, e.target.value)}
+											className="mt-1 flex w-36 rounded-md border border-secondGrey bg-black p-2 focus:border-customOrange focus:outline-none sm:text-sm"
+										/>
+									</div>
 								))}
 								<div className="mt-2 flex justify-end">
 									<button
-										className="flex rounded bg-customOrange  p-2 text-xs text-white"
+										className="flex rounded bg-customOrange p-2 text-xs text-white"
 										onClick={() => callFunction(func.name)}
 									>
-										transac
+										Transact
 									</button>
 								</div>
 							</div>
