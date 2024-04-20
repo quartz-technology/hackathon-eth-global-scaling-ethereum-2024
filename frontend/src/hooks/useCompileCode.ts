@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useCompileContext } from '@/contexts/CompileContext';
 
@@ -10,7 +11,7 @@ interface CompileData {
 }
 
 export default function useCompileCode() {
-	const { files, abi, bytecode } = useCompileContext();
+	const { files, contractAddress: contractLabel, abi, bytecode } = useCompileContext();
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const compileCode = async () => {
@@ -18,11 +19,14 @@ export default function useCompileCode() {
 		const code: string = files.value[0].content;
 		const contractNameMatch = code.match(/contract\s+(\w+)\s+/);
 
-		if (!bytecode.setValue || !abi.setValue) return;
+		if (!bytecode.setValue || !abi.setValue || !contractLabel.setValue) return;
 		if (!contractNameMatch) {
 			toast.error('Compilation error: Contract name not found.');
+
+			contractLabel.setValue('');
 			bytecode.setValue('');
 			abi.setValue('');
+
 			setLoading(false);
 			return;
 		}

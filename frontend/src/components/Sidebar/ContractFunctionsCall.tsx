@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 import { useCompileContext } from '@/contexts/CompileContext';
+import { useWeb3Context } from '@/contexts/WalletContext';
 
 type ABI = Array<{
 	name: string;
@@ -15,7 +17,8 @@ type ABI = Array<{
 type InputsType = { [funcName: string]: string[] };
 
 const ContractFunctionsCall: React.FC = () => {
-	const { abi, zkResult } = useCompileContext();
+	const { web3Service } = useWeb3Context();
+	const { contractAddress, abi, zkResult } = useCompileContext();
 	const [inputs, setInputs] = useState<InputsType>({});
 	const [openFunctions, setOpenFunctions] = useState<{ [key: string]: boolean }>({});
 
@@ -55,9 +58,37 @@ const ContractFunctionsCall: React.FC = () => {
 		});
 	};
 
-	const callFunction = (funcName: string) => {
-		console.log('Calling function:', funcName, 'with inputs:', inputs[funcName]);
+	const callFunction = async (funcName: string) => {
 		// Here you would add your contract call logic
+		const params = Object.values(inputs[funcName]);
+
+		if (!params) {
+			toast.error('Missing input parameters');
+			return;
+		}
+
+		toast
+			.promise(
+				web3Service.interactWithContract(
+					contractAddress.value,
+					JSON.parse(abi.value),
+					funcName,
+					params,
+					{},
+					true,
+				),
+				{
+					pending: 'Calling function..',
+					success: 'Function called!',
+					error: 'Failed to call function',
+				},
+			)
+			.then((result) => {
+				console.log('Function call result:', result);
+			})
+			.catch((error: Error) => {
+				toast.error(`Call error: ${error.message}`);
+			});
 	};
 
 	if (!abi.value)
@@ -103,7 +134,9 @@ const ContractFunctionsCall: React.FC = () => {
 								<div className="mt-2 flex justify-end">
 									<button
 										className="flex rounded bg-customOrange p-2 text-xs text-white"
-										onClick={() => callFunction(func.name)}
+										onClick={async () => {
+											await callFunction(func.name);
+										}}
 									>
 										Transact
 									</button>
