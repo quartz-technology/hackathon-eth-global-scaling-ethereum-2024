@@ -1,5 +1,6 @@
 use methods::{ZKORA_ELF, ZKORA_ID};
 use risc0_zkvm::recursion::identity_p254;
+use risc0_zkvm::sha::Digest;
 use risc0_zkvm::{default_prover, get_prover_server, stark_to_snark, ExecutorEnv, ProverOpts};
 
 #[macro_use]
@@ -23,6 +24,8 @@ struct ZKScript<'r> {
 
 #[post("/", format = "json", data = "<zkscript>")]
 fn execute_script(zkscript: Json<ZKScript<'_>>) -> Json<ZKScriptExecutionResult> {
+    println!("ImageID: {}", hex::encode(Digest::from(ZKORA_ID)));
+
     let env = ExecutorEnv::builder()
         .write(&zkscript.code)
         .unwrap()
