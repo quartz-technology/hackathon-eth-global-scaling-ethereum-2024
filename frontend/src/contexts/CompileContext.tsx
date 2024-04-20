@@ -98,7 +98,7 @@ interface IRiscZeroVerifier {
 
 contract ZKoraContract {
 	IRiscZeroVerifier public immutable verifier = IRiscZeroVerifier(0x1dCB83CAaf036E54af6a033Ec85E56F773cB3AcC);
-	bytes32 public constant imageId = bytes32(0x0f91e35e2e05e74548d9b7cf8700e1762d7b9db28c400a701203dc37586998cf);
+	bytes32 public constant imageId = bytes32(0xf0a7eb14a820e9a331f38655817f14e4598aac7843de22248bc0309ea83c6b56);
 
 	uint256 public number;
 
