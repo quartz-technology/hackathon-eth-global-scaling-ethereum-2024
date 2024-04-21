@@ -57,9 +57,10 @@ fn execute_script(zkscript: Json<ZKScript<'_>>) -> Json<ZKScriptExecutionResult>
                     let ident_receipt = identity_p254(&sr).unwrap();
                     let seal_bytes = ident_receipt.get_seal_bytes();
 
+                    let seal_snark = stark_to_snark(&seal_bytes).unwrap().to_vec();
                     seal = format!(
                         "0x{}",
-                        hex::encode(stark_to_snark(&seal_bytes).unwrap().to_vec())
+                        hex::encode(seal_snark)
                     );
                 }
                 Err(_) => {
@@ -74,8 +75,8 @@ fn execute_script(zkscript: Json<ZKScript<'_>>) -> Json<ZKScriptExecutionResult>
 
     Json(ZKScriptExecutionResult {
         x: x,
-        post_state_digest: hex::encode(post_state_digest),
-        seal: hex::encode(seal.clone()),
+        post_state_digest: post_state_digest,
+        seal: seal.clone(),
     })
 }
 
