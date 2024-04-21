@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import 'react-toastify/dist/ReactToastify.css';
 
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import { useCompileContext } from '@/contexts/CompileContext';

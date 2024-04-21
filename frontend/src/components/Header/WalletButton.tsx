@@ -6,7 +6,7 @@ import { useWeb3Context } from '@/contexts/WalletContext';
 
 function WalletButon() {
 	const { account, isLogged, web3Service } = useWeb3Context();
-	const [balance, setBalance] = useState<string>(0);
+	const [balance, setBalance] = useState<string>('0');
 
 	// TODO: remove just for testing
 	// function uiConsole(...args: any[]): void {

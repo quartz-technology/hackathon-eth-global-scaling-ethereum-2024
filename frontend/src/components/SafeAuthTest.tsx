@@ -1,17 +1,17 @@
 // TODO: SafeAuth with only google :(
-import { SafeAuthInitOptions, SafeAuthPack } from '@safe-global/auth-kit';
+import { SafeAuthPack } from '@safe-global/auth-kit';
 import { EthersAdapter, SafeFactory } from '@safe-global/protocol-kit';
 import { BrowserProvider, Eip1193Provider, ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
 
 const SafeAuthComponent = () => {
-	const [safeAuthPack, setSafeAuthPack] = useState(null);
+	const [safeAuthPack, setSafeAuthPack] = useState<SafeAuthPack | null>(null);
 	const [userAddress, setUserAddress] = useState('');
 	const [safeAddress, setSafeAddress] = useState('');
 
 	useEffect(() => {
 		const initSafeAuth = async () => {
-			const safeAuthPack = new SafeAuthPack();
+			const SAP = new SafeAuthPack();
 			const safeAuthInitOptions = {
 				showWidgetButton: false,
 				chainConfig: {
@@ -23,8 +23,8 @@ const SafeAuthComponent = () => {
 					tickerName: 'Ethereum',
 				},
 			};
-			await safeAuthPack.init(safeAuthInitOptions);
-			setSafeAuthPack(safeAuthPack);
+			await SAP.init(safeAuthInitOptions);
+			setSafeAuthPack(SAP);
 		};
 
 		initSafeAuth();
@@ -41,7 +41,9 @@ const SafeAuthComponent = () => {
 		const provider = new BrowserProvider(safeAuthPack?.getProvider() as Eip1193Provider);
 		const signer = await provider.getSigner();
 		const ethAdapter = new EthersAdapter({
+			// @ts-expect-error TODO
 			ethers,
+			// @ts-expect-error TODO
 			signerOrProvider: signer,
 		});
 		const safeFactory = await SafeFactory.create({ ethAdapter });

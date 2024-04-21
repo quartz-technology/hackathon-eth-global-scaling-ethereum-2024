@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { v4 as uuidv4 } from 'uuid';
 
 import { useCompileContext } from '@/contexts/CompileContext';
 
@@ -45,6 +44,7 @@ export default function useCompileCode() {
 				bytecode.setValue(data.bytecode);
 				abi.setValue(JSON.stringify(data.abi, null, 2));
 			} else {
+				// @ts-expect-error TODO
 				throw new Error(data.error || 'An error occurred during compilation.');
 			}
 		} catch (error) {

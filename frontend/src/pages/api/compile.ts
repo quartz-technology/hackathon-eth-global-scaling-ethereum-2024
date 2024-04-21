@@ -81,6 +81,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 		res.status(200).json({ bytecode, abi });
 	} catch (error) {
 		console.error('Compilation error:', error);
+		// @ts-expect-error TODO
 		res.status(500).json({ error: `Compilation error: ${error.message}` });
 	}
 }

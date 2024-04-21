@@ -30,6 +30,7 @@ export default class Web3AuthService {
 			privateKeyProvider,
 		});
 
+		// @ts-expect-error TODO
 		this.web3Auth.configureAdapter(metamaskAdapter);
 	}
 
@@ -116,6 +117,7 @@ export default class Web3AuthService {
 
 	async interactWithContract(
 		contractAddress: string,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		abi: any,
 		methodName: string,
 		parameters: string[] = [],
@@ -150,6 +152,7 @@ export default class Web3AuthService {
 		return result; // Returns the result of the read operation
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	async deployContract(abi: any, bytecode: string) {
 		if (!this.web3) {
 			console.error('Web3 not initialized');

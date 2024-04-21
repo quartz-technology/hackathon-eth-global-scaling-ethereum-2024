@@ -43,7 +43,10 @@ function IDE() {
 						{files.value.map((file, idx) => (
 							<Tab
 								key={idx}
-								ref={(el) => (tabsRef.current[idx] = el)}
+								ref={(el) => {
+									// @ts-expect-error TODO
+									tabsRef.current[idx] = el;
+								}}
 								className="w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-White ring-0 hover:bg-grey focus:outline-none"
 							>
 								{file.name}

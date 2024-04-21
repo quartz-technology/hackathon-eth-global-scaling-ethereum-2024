@@ -32,7 +32,9 @@ const createSafe = async () => {
 		const signer = await provider.getSigner();
 
 		const ethAdapter = new EthersAdapter({
+			// @ts-expect-error TODO
 			ethers,
+			// @ts-expect-error TODO
 			signerOrProvider: signer,
 		});
 
