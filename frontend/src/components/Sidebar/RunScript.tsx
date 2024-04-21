@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 
 import { useCompileContext } from '@/contexts/CompileContext';
 
+// import BackendSDK from '@/services/backendSDK';
 import { RunScriptButton } from './Buttons';
 import ClipboardCopyButton from './ClipBoardCopyButton';
 
@@ -47,6 +48,14 @@ function RunScript() {
 						<div className="flex w-full items-center justify-center">
 							<RunScriptButton
 								onClick={() => {
+									// If running locally, use backend.
+									// The proving time is so long that we just use pre-computed values here.
+									// const sdk = new BackendSDK();
+									// const res = await sdk.execute(code);
+									// updatePostDigest(res.postDigest);
+									// updateSeal(res.seal);
+									// updateResult(res.result);
+
 									toast.promise(resolveAfter3Sec, {
 										pending: 'zkVM running',
 										success: 'Prooved',
