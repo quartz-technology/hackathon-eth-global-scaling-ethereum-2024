@@ -23,6 +23,7 @@ interface IZkResult {
 interface ICompileContext {
 	files: SetStateContext<IFileInfo[]>;
 	selectedIndex: SetStateContext<number>;
+	contractAddress: SetStateContext<string>;
 	abi: SetStateContext<string>;
 	bytecode: SetStateContext<string>;
 	zkResult: SetStateContext<IZkResult>;
@@ -34,6 +35,9 @@ const CompileContext = createContext<ICompileContext>({
 	},
 	selectedIndex: {
 		value: 0,
+	},
+	contractAddress: {
+		value: '',
 	},
 	abi: {
 		value: '',
@@ -52,6 +56,7 @@ const CompileContext = createContext<ICompileContext>({
 
 export const CompileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [selectedIndex, setSelectedIndex] = useState<number>(0);
+	const [contractLabel, setContractLabel] = useState<string>('');
 	const [abi, setAbi] = useState<string>('');
 	const [bytecode, setBytecode] = useState<string>('');
 	const [zkResult, setZkResult] = useState<IZkResult>({ seal: '', postDigest: '', result: '' });
@@ -91,14 +96,13 @@ interface IRiscZeroVerifier {
 	function verify_integrity(Receipt calldata receipt) external view returns (bool);
 }
 
-contract EvenNumber {
-	IRiscZeroVerifier public immutable verifier = IRiscZeroVerifier(0x83C2e9CD64B2A16D3908E94C7654f3864212E2F8);
-	bytes32 public constant imageId = bytes32(0xf701f26dc10ab9c1e54749f003641f8d683d60f56d047fec8f87930394466ca6);
-	
+contract ZKoraContract {
+	IRiscZeroVerifier public immutable verifier = IRiscZeroVerifier(0x1dCB83CAaf036E54af6a033Ec85E56F773cB3AcC);
+	bytes32 public constant imageId = bytes32(0xf0a7eb14a820e9a331f38655817f14e4598aac7843de22248bc0309ea83c6b56);
+
 	uint256 public number;
 
-	constructor(IRiscZeroVerifier _verifier) {
-		verifier = _verifier;
+	constructor() {
 		number = 0;
 	}
 
@@ -127,6 +131,10 @@ res`,
 				selectedIndex: {
 					value: selectedIndex,
 					setValue: setSelectedIndex,
+				},
+				contractAddress: {
+					value: contractLabel,
+					setValue: setContractLabel,
 				},
 				abi: {
 					value: abi,

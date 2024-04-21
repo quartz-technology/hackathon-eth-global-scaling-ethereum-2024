@@ -1,0 +1,19 @@
+[package]
+name = "host"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+methods = { path = "../methods" }
+risc0-zkvm = { version = "0.21.0", features = ["prove"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+serde = "1.0"
+rocket = { version = "0.5.0", features = ["json"] }
+alloy-primitives = { workspace = true }
+bonsai-sdk = { version = "0.7" }
+risc0-ethereum-contracts = { workspace = true }
+anyhow = { workspace = true }
+bincode = { workspace = true }
+hex = "0.4.3"
+risc0-groth16 = { version = "0.21.0" }
+alloy-sol-types = { version = "0.6" }

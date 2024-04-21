@@ -113,4 +113,79 @@ export default class Web3AuthService {
 			return null;
 		}
 	}
+
+	async interactWithContract(
+		contractAddress: string,
+		abi: any,
+		methodName: string,
+		parameters: string[] = [],
+		transactionOptions = {},
+		sendTransaction = false,
+	) {
+		if (!this.web3) {
+			console.error('Web3 not initialized');
+
+			return null;
+		}
+
+		const contract = new this.web3.eth.Contract(abi, contractAddress);
+
+		const accounts = await this.web3.eth.getAccounts();
+		if (sendTransaction && accounts.length === 0) {
+			console.error('No accounts available for sending transaction');
+
+			return null;
+		}
+
+		if (sendTransaction) {
+			// Send a transaction to the contract
+			const receipt = await contract.methods[methodName](...parameters).send({
+				from: accounts[0],
+				...transactionOptions,
+			});
+			return receipt; // Returns the transaction receipt
+		}
+		// Call a view/read-only method of the contract
+		const result = await contract.methods[methodName](...parameters).call();
+		return result; // Returns the result of the read operation
+	}
+
+	async deployContract(abi: any, bytecode: string) {
+		if (!this.web3) {
+			console.error('Web3 not initialized');
+			return null;
+		}
+
+		try {
+			// Create the contract instance with the ABI
+			const contract = new this.web3.eth.Contract(abi);
+
+			// Get accounts
+			const accounts = await this.web3.eth.getAccounts();
+			if (accounts.length === 0) {
+				console.error('No accounts available');
+				return null;
+			}
+
+			console.log(bytecode);
+
+			// Deploy the contract using the provided bytecode and constructor arguments
+			const deployment = contract.deploy({
+				data: `0x${bytecode}`, // Ensure bytecode is prefixed with '0x'
+				arguments: [],
+			});
+
+			// Send the transaction from the first account with a specified gas limit and gas price
+			const deployedContract = await deployment.send({
+				from: accounts[0],
+				gas: '1500000', // Set gas limit - adjust according to your needs
+				gasPrice: '30000000000', // Set gas price - adjust according to current network conditions
+			});
+
+			return deployedContract.options.address; // Returns the deployed contract address
+		} catch (error) {
+			console.error('Failed to deploy contract:', error);
+			return null;
+		}
+	}
 }
