@@ -116,7 +116,7 @@ contract ZKoraContract {
 		{
 			name: 'zkScript.js',
 			language: 'javascript',
-			content: `let res = 1 + 1;
+			content: `let res = 41 + 1;
 res`,
 		},
 	]);
